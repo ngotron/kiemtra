@@ -7,6 +7,13 @@
     </div>
 
     <tbody>
+        <script>
+            var msg = '{{ Session::get('alert') }}';
+            var exist = '{{ Session::has('alert') }}';
+            if (exist) {
+                alert(msg);
+            }
+        </script>
         @if (empty($foods))
             <tr>
                 <td colspan="5">

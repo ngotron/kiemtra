@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->increments("id");
-            $table->string('name',100);
-            $table->string('decription',100);
+            $table->string('name', 100);
+            $table->string('decription', 500);
             $table->float('price');
             $table->string('image');
             $table->timestamps();

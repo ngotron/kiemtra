@@ -1,8 +1,18 @@
 <form action="{{ !isset($food) ? route('foods.store') : route('foods.update', $food->id) }}" method="post"
     enctype="multipart/form-data">
+
     @csrf
     @if (isset($food))
         @method('put')
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
     Name:
     <input type="text" class="form-control mb-3" name="name" value="{{ isset($food) ? $food->name : '' }}"

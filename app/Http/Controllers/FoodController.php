@@ -37,31 +37,27 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             "name" => "required",
             "price" => "required",
             "decription" => "required",
-            'image' => 'mimes:jpg,png,gif,jpeg|max: 2048'
+            "image" => "required|max:4096|mimes:png,jpg,jpeg"
         ], [
-            "name.requied" => "Nhập tên",
-            "price.requied" => "Nhập giá",
-            "decription.requied" => "Nhập mô tả",
-            'image.mimes' => 'Chỉ chấp nhận file hình ảnh',
-            'image.max' => 'Chỉ chấp nhận hình ảnh dưới 2Mb'
+            "required" => "Ko thể để trống",
+            "max" => "Hinh ảnh tối da 4MB",
+            "mines" => "chỉ chấp nhận png, jpg, jpeg",
         ]);
-
         $file = $request->file("image");
         $fileName = time() . "_" . $file->getClientOriginalName();
         $file->move(public_path("image"), $fileName);
         $food = new Food();
         $food->name = $request->name;
-        $food->decription = $request->decription;
         $food->price = $request->price;
+        $food->decription = $request->decription;
 
         $food->image = $fileName;
         $food->save();
-        return redirect()->route("foods.index");
+        return redirect()->route("foods.index")->with('alert', 'Bạn đã thêm thành công');;
     }
 
     /**
