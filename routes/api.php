@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiFoodController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::apiResource('foods', ApiFoodController::class);
+
+Route::get('search/{key}', [ApiFoodController::class, 'search']);
+// Route::get('/get-product-by-keyword', [ApiFoodController::class, 'searchByName']);
+// Route::get('search/{key}', [ApiCarController::class, 'search']);
+// Route::get('/show', [ApiFoodController::class, 'search']);
